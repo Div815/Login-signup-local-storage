@@ -1,0 +1,154 @@
+.header{
+  background-color: #d1a2a2;
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  font-size: 24px;
+  color:darkgreen;
+}
+
+body{
+  margin: 0;
+  padding: 0;
+  background-color: azure;
+ 
+}
+footer{
+   background-color: azure;
+}
+
+.hero-section {
+    position: relative; 
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    z-index: -1;      
+    filter: brightness(0.6); 
+}
+
+.hero-content {
+    text-align: center;
+    color: white;
+}
+
+.hero-content h1 {
+    font-size: 40px;
+    margin: 0;
+}
+
+.cta-btn {
+    margin-top: 20px;
+    padding: 12px 24px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.hero-section .cta-btn:hover{
+  background-color: #555;
+}
+
+.properties-section{
+  padding: 10px;
+  background-color: azure;
+  display: flex;
+  flex-direction: column;
+  
+}
+.properties-section h2{
+  margin-left: 50px;
+  font-size: 32px;
+  margin-bottom: 20px;
+  color:darkblue;
+}
+.property-grid{
+  display: grid;
+   
+    grid-template-columns: 1fr 1fr; 
+    
+   
+    gap: 30px; 
+    
+    padding: 40px;
+    background-color: azure;
+}
+.property-card{
+  background-color: white;
+  border: 2px solid #ddd;
+  border-radius: 5px;
+  overflow: hidden;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  height: 50vh;
+}
+
+
+.property-card img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.about-section{
+  padding: 40px;
+  background-color: azure;
+  text-align: center;
+}
+.about-section h2{
+  font-size: 32px;
+  margin-bottom: 20px;
+  font-size: 60px;
+} 
+.about-section p{
+  font-size: 18px;
+  line-height: 1.6;
+  
+  margin: 0 auto;
+
+}
+.about-section .story-p{
+  font-style: italic;
+  font-weight: bold;
+  
+  }
+  .about-section ul {
+  list-style-type: none;
+  padding: 0;            
+  margin: 0;             
+  display: flex;       
+  align-items: start; 
+  gap: 20px;            
+}
+.about-section .about-p{
+  font-style: italic;
+  font-weight: bolder;
+  font-size: 50px;
+}
+
+.footer-section {
+    width: 100%; /* Changed from 50% to 100% to cover the full width */
+    padding: 20px 0; 
+    color: darkblue;
+    background-color: azure !important; /* Added !important to override any image bleed */
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    position: relative; /* Ensures it sits on top of absolute elements */
+    z-index: 10; /* Keeps it above the hero image if it still overlaps */
+}
+footer {
+    width: 100%;
+    background-color: azure;
+}

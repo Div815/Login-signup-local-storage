@@ -1,0 +1,109 @@
+* {
+    box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+.main{
+  background: rgba(255, 255, 255, 0.2);
+    
+    
+    backdrop-filter: blur(10px);
+   
+    
+   
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    
+    
+    border-radius: 15px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  width: 800;
+  margin: 80px;
+  
+}
+
+form{
+  width:330px;
+  text-align:center;
+  margin:100px;
+}
+form input:-webkit-autofill {
+    border: 1px solid rgba(0, 0, 0, 0.2); /* Darker border for visibility */
+    -webkit-text-fill-color: #000000;
+}
+form input:-webkit-autofill,
+form input:-webkit-autofill:hover, 
+form input:-webkit-autofill:focus {
+    /* This keeps the text color black even during autofill */
+    -webkit-text-fill-color: #333; 
+    
+    /* This makes the background transparent again */
+    transition: background-color 5000s ease-in-out 0s;
+    
+    /* Ensures the border stays visible */
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+form input{
+    color: #000000 !important;
+  width: 100%;
+    padding: 12px 16px;
+    margin: 10px 0;
+    display: inline-block;
+    
+    
+    /* Transparent background to fit glass theme */
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(0, 0, 0, 0.2) !important;
+    border-radius: 8px;
+   
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+form input:not(:placeholder-shown) {
+    color: #000000;
+}
+form input:focus{
+    
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #505268; 
+    box-shadow: 0 0 8px rgba(100, 108, 255, 0.5);
+
+}
+
+form button{
+  width:135px;
+  height: 33px;
+  background-color: coral;
+  color:white;
+  font-size:18px;
+  border:none;
+  cursor: pointer;
+  margin-top:22px
+}
+form .heading{
+  font-size: 30px;
+  font-weight:600;
+  margin-bottom:20px;
+}
+
+.account{
+  text-align:left;
+  margin-top:-10px;
+}
+.account p{
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size:15px;
+  color:brown
+} 

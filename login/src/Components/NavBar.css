@@ -1,0 +1,31 @@
+.navbar {
+    background-image: radial-gradient(rgba(155, 234, 250, 0.5), rgba(9, 222, 255, 0.5));
+    margin: 0;
+    padding: 10px 40px; 
+    color:darkblue;
+    
+    
+    display: flex;
+    justify-content: space-between; 
+    align-items: center; 
+}
+
+
+.navbar h2 {
+    margin: 0;
+    padding: 0;
+    font-size: 24px; 
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 50px; 
+}
+
+.navbar li {
+    cursor: pointer;
+    font-size: 18px;
+}
