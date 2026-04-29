@@ -10,7 +10,7 @@ function Home() {
 
       
       <section className="hero-section">
-        <img src="../public/images/bg.jpeg" alt="Hero Image" className="hero-image"/>
+        <img src="images/bg.jpeg" alt="Hero Image" className="hero-image"/>
         <div className='hero-content'>
           <h1>Find Your Dream Home</h1>
           <p>Searching for luxury villas and apartments in your area.</p>
@@ -22,10 +22,10 @@ function Home() {
       <section className="properties-section">
         <h2>Featured Properties</h2>
         <div className="property-grid">
-          <div className="property-card"><img src="../public/images/h1.jpeg" alt="Property 1"/> </div>
-          <div className="property-card"><img src="../public/images/h2.jpeg" alt="Property 2"/></div>
-          <div className="property-card"><img src="../public/images/h3.jpeg" alt="Property 3"/></div>
-          <div className="property-card"><img src="../public/images/h4.jpeg" alt="Property 4"/></div>
+          <div className="property-card"><img src="images/h1.jpeg" alt="Property 1"/> </div>
+          <div className="property-card"><img src="images/h2.jpeg" alt="Property 2"/></div>
+          <div className="property-card"><img src="images/h3.jpeg" alt="Property 3"/></div>
+          <div className="property-card"><img src="images/h4.jpeg" alt="Property 4"/></div>
         </div>
       </section>
 
