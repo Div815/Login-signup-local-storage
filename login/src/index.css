@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+@theme {
+  /* This maps the 'font-questrial' class to the Questrial font family */
+  --font-questrial: "Questrial", sans-serif;
+  
+  /* You can also add your custom green colors here to match the screenshot! */
+  --color-brand-green: #032d18;
+  --color-input-dark: #0f2c1d;
+}

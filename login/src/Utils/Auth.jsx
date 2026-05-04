@@ -1,4 +1,4 @@
-// src/Utils/auth.js
+
 
 // Predefined Admin Credentials
 const PREDEFINED_ADMIN = {
@@ -17,7 +17,7 @@ export const registerUser = (user) => {
 };
 
 export const loginUser = (email, password, selectedRole) => {
-    // 1. Check if trying to login as Admin with predefined credentials
+    // 1. Check if trying to login as Admin with  credentials
     if (selectedRole === "admin") {
         if (email === PREDEFINED_ADMIN.email && password === PREDEFINED_ADMIN.password) {
             localStorage.setItem("isAuth", "true");

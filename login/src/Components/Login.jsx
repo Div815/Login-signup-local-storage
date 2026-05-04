@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
-import '../Components/Login.css';
+
 import { loginUser } from '../Utils/auth';
 
 const Login = () => {
