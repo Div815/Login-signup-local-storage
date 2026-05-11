@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { registerUser } from '../Utils/auth'; // Import your utility function
+import { registerUser } from '../Utils/auth'; 
+import toast, { Toaster } from 'react-hot-toast'; // 1. Added Toaster import
 
 function Signup() {
     const navigate = useNavigate();
@@ -13,40 +14,44 @@ function Signup() {
         setFormData(prev => ({ ...prev, [name]: value }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async(e) => {
         e.preventDefault();
 
-        // 1. Basic Validation
         if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
+            toast.error("Passwords do not match!"); // 2. Replaced alert with toast
             return;
         }
 
-        // 2. Format the data to match your Auth/Dashboard needs
         const userData = {
             name: `${formData.firstName} ${formData.lastName}`,
             email: formData.email,
             password: formData.password
         };
 
-        // 3. Use the centralized register function from auth.jsx
-        // This function handles existing user checks and localStorage keys correctly
         const success = registerUser(userData);
 
         if (success) {
-            alert("Registration Successful!");
-            navigate('/login');
+            // 3. Fire toast first
+            toast.success("Registration successful! Please log in.");
+            
+            // 4. The 2-second pause
+            setTimeout(() => {
+                navigate('/login');
+            }, 2000);
+            
         } else {
-            alert("Registration failed. Email might already exist.");
+            toast.error("Registration failed. Email might already exist."); // 5. Replaced alert with toast
         }
     };
 
     return (
         <div className="h-screen w-full bg-black flex items-center justify-center font-questrial overflow-hidden p-4">
+            {/* 6. Crucial: Add Toaster here if it's not in App.js */}
+            <Toaster position="top-center" /> 
+            
             <div className="signup-card w-full max-w-6xl h-full max-h-[85vh] grid grid-cols-1 md:grid-cols-2 shadow-xl overflow-hidden ml-0">
-                
                 {/* --- Left Column --- */}
-                <div className="signup-info bg-[url('../public/images/green-signup.png')] bg-cover bg-center text-white p-8 md:p-12 relative flex flex-col justify-between h-full ">
+                <div className="signup-info bg-[url('/images/green-signup.png')] bg-cover bg-center text-white p-8 md:p-12 relative flex flex-col justify-between h-full ">
                     <div className="flex justify-between items-center text-2xl">
                         <h2 className='font-bold text-emerald-400'>Logo</h2>
                         <span>@</span>

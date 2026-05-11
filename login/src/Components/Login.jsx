@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../Utils/auth';
+import ForgotPassword from './ForgotPassword';
+
+
 
 const Login = () => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
@@ -89,7 +92,7 @@ const Login = () => {
                                 <input type="checkbox" className="accent-emerald-500" />
                                 <span className="text-gray-400">Remember Me</span>
                             </label>
-                            <a href="#" className="text-blue-500 hover:underline">Forgot Password</a>
+                            <a href="/forgot-password" className="text-blue-500 hover:underline">Forgot Password</a>
                         </div>
 
                         <button 
