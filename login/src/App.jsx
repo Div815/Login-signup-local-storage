@@ -1,18 +1,25 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'; 
+import { Toaster } from 'react-hot-toast'; // Import Toaster here
 import Login from './Components/Login'; 
 import Signup from './Components/Signup'; 
+import LandingPage from './Components/LandingPage';
 import Home from './Components/Home';
-import AdminDashboard from './Components/AdminDashboard'; // You will create this
+import ForgotPassword from './Components/ForgotPassword';
+import AdminDashboard from './Components/AdminDashboard'; 
 import { ProtectedRoute, AdminRoute } from './Utils/ProtectedRoute';
 
 function App() {
   return (
     <BrowserRouter>
+      <Toaster/>
+      
       <Routes>
         {/* Public Routes */}
-        <Route path='/' element={<Signup />} />
+        <Route path='/' element={<LandingPage />} />
         <Route path='/login' element={<Login />} />
-
+        <Route path='/signup' element={<Signup />} />
+        <Route path='/forgot-password' element={<ForgotPassword />} />
+        
         {/* Protected User Route */}
         <Route path='/home' element={
           <ProtectedRoute>

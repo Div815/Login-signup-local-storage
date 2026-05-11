@@ -1,6 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { logout } from '../Utils/auth';
 import { useNavigate } from 'react-router-dom';
+import { 
+    LayoutDashboard, 
+    BarChart3, 
+    Settings, 
+    LogOut, 
+    Bell, 
+    Search, 
+    Users, 
+    Trash2, 
+    ShieldAlert, 
+    ShieldCheck,
+    TrendingUp
+} from 'lucide-react';
 import {
     Chart as ChartJS,
     CategoryScale,
@@ -14,6 +27,12 @@ import { Bar } from 'react-chartjs-2';
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
+const notificationColors = {
+    info: "border-cyan-500 bg-cyan-950 text-cyan-300",
+    success: "border-emerald-500 bg-emerald-950 text-emerald-300",
+    warning: "border-yellow-500 bg-yellow-950 text-yellow-300",
+};
+
 const AdminDashboard = () => {
     const navigate = useNavigate();
     const [users, setUsers] = useState([]);
@@ -25,12 +44,10 @@ const AdminDashboard = () => {
         setUsers(storedUsers);
     }, []);
 
-    // Analytics Calculations
     const totalUsers = users.length;
     const activeUsers = users.filter(u => u.status === 'active').length;
     const blockedUsers = users.filter(u => u.status === 'blocked').length;
 
-    // Filter Logic
     const filteredUsers = users.filter(user => {
         const matchesSearch = user.name?.toLowerCase().includes(searchTerm.toLowerCase()) || 
                               user.email?.toLowerCase().includes(searchTerm.toLowerCase());
@@ -38,17 +55,22 @@ const AdminDashboard = () => {
         return matchesSearch && matchesStatus;
     });
 
+    const dynamicNotifications = [...users].reverse().slice(0, 3).map(user => ({
+        text: `New user '${user.name}' joined`,
+        time: "Recently", 
+        type: "info"
+    }));
+
     const chartData = {
         labels: ['Total', 'Active', 'Blocked'],
         datasets: [{
             label: 'User Statistics',
             data: [totalUsers, activeUsers, blockedUsers],
-            backgroundColor: ['#3b82f6', '#10b981', '#ef4444'],
+            backgroundColor: ['#22d3ee', '#10b981', '#f43f5e'],
             borderRadius: 6,
         }],
     };
 
-    // Actions
     const saveAndUpdate = (newData) => {
         localStorage.setItem('users', JSON.stringify(newData));
         setUsers(newData);
@@ -69,115 +91,116 @@ const AdminDashboard = () => {
     };
 
     return (
-        <div className="flex min-h-screen bg-gray-100 font-sans">
+        <div className="flex min-h-screen bg-black font-questrial text-white">
             {/* Sidebar */}
-            <aside className="w-64 bg-slate-900 text-white hidden md:flex flex-col p-6">
-                <h2 className="text-2xl font-bold mb-8">AdminPro</h2>
+            <aside className="w-64 bg-emerald-950 text-zinc-100 hidden md:flex flex-col p-6">
+                <div className="flex items-center gap-2 mb-8 text-emerald-300">
+                    <ShieldCheck size={28} />
+                    <h2 className="text-2xl font-bold">AdminPro</h2>
+                </div>
                 <nav className="flex-1 space-y-4">
-                    <div className="hover:bg-slate-800 p-2 rounded cursor-pointer transition">Dashboard</div>
-                    <div className="hover:bg-slate-800 p-2 rounded cursor-pointer transition">Analytics</div>
-                    <div className="hover:bg-slate-800 p-2 rounded cursor-pointer transition">Settings</div>
+                    <SidebarItem icon={<LayoutDashboard size={20}/>} label="Dashboard" active />
+                    <SidebarItem icon={<BarChart3 size={20}/>} label="Analytics" />
+                    <SidebarItem icon={<Settings size={20}/>} label="Settings" />
                 </nav>
                 <button 
                     onClick={() => { logout(); navigate("/login"); }}
-                    className="mt-auto bg-red-500 hover:bg-red-600 p-2 rounded font-semibold transition"
+                    className="mt-auto flex items-center justify-center gap-2 bg-rose-900 hover:bg-rose-950 p-2 rounded font-semibold transition text-rose-100"
                 >
-                    Logout
+                    <LogOut size={18} /> Logout
                 </button>
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 p-4 md:p-8 overflow-y-auto">
+            <main className="flex-1 p-4 md:p-8 overflow-y-auto bg-zinc-950">
                 <div className="flex justify-between items-center mb-8">
-                    <h1 className="text-3xl font-bold text-gray-800">Dashboard Overview</h1>
+                    <h1 className="text-3xl font-bold text-zinc-100">Dashboard Overview</h1>
                     <div className="relative">
-                        <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-4 w-4 flex items-center justify-center">3</span>
-                        <button className="text-2xl text-gray-600">🔔</button>
+                        <span className="absolute -top-1 -right-1 bg-cyan-500 text-black text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">
+                            {dynamicNotifications.length}
+                        </span>
+                        <Bell className="text-cyan-500 cursor-pointer hover:text-cyan-400 transition" size={24} />
                     </div>
                 </div>
 
-                {/* 1. Statistics Cards */}
+                {/* Statistics Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-                    <StatCard title="Total Users" value={totalUsers} color="border-blue-500" />
-                    <StatCard title="Active Users" value={activeUsers} color="border-green-500" />
-                    <StatCard title="Blocked Users" value={blockedUsers} color="border-red-500" />
-                    <StatCard title="Monthly Growth" value="+14%" color="border-purple-500" />
+                    <StatCard icon={<Users size={20}/>} title="Total Users" value={totalUsers} color="border-cyan-500" />
+                    <StatCard icon={<ShieldCheck size={20}/>} title="Active Users" value={activeUsers} color="border-emerald-500" />
+                    <StatCard icon={<ShieldAlert size={20}/>} title="Blocked Users" value={blockedUsers} color="border-rose-500" />
+                    <StatCard icon={<TrendingUp size={20}/>} title="Monthly Growth" value="+14%" color="border-cyan-500" />
                 </div>
 
-                {/* 2. Charts & Notifications Section */}
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-                    <div className="lg:col-span-2 bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                        <h3 className="text-lg font-bold mb-4">User Activity Analytics</h3>
+                    <div className="lg:col-span-2 bg-zinc-900 p-6 rounded-xl border border-emerald-950">
+                        <h3 className="text-lg font-bold mb-4 text-emerald-300">User Activity Analytics</h3>
                         <div className="h-64">
-                            <Bar data={chartData} options={{ maintainAspectRatio: false }} />
+                            <Bar data={chartData} options={{ 
+                                maintainAspectRatio: false,
+                                scales: {
+                                    y: { ticks: { color: "#71717a" } },
+                                    x: { ticks: { color: "#71717a" } }
+                                },
+                                plugins: { legend: { labels: { color: "#d1d5db" } } }
+                            }} />
                         </div>
                     </div>
-                    <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">
-                        <h3 className="text-lg font-bold mb-4">Notifications Panel</h3>
+
+                    <div className="bg-zinc-900 p-6 rounded-xl border border-emerald-950">
+                        <h3 className="text-lg font-bold mb-4 text-emerald-300">Recent Activity</h3>
                         <div className="space-y-4">
-                            <NotificationItem text="New user 'Sarah' joined" time="2 min ago" color="bg-blue-100" />
-                            <NotificationItem text="Backup completed successfully" time="1 hr ago" color="bg-green-100" />
-                            <NotificationItem text="High traffic alert" time="3 hrs ago" color="bg-yellow-100" />
+                            {dynamicNotifications.map((note, index) => (
+                                <NotificationItem key={index} text={note.text} time={note.time} type={note.type} />
+                            ))}
                         </div>
                     </div>
                 </div>
 
-                {/* 3. User Management Table */}
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <div className="p-6 border-b border-gray-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                        <h3 className="text-lg font-bold">User Management</h3>
+                {/* Table */}
+                <div className="bg-zinc-900 rounded-xl border border-emerald-950 overflow-hidden">
+                    <div className="p-6 border-b border-emerald-950 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <h3 className="text-lg font-bold text-emerald-300">User Management</h3>
                         <div className="flex gap-2">
-                            <input 
-                                type="text" 
-                                placeholder="Search email/name..." 
-                                className="border rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none"
-                                onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                            <select 
-                                className="border rounded-lg px-3 py-2 text-sm outline-none"
-                                onChange={(e) => setFilterStatus(e.target.value)}
-                            >
-                                <option value="All">All</option>
-                                <option value="active">Active</option>
-                                <option value="blocked">Blocked</option>
-                            </select>
+                            <div className="relative">
+                                <Search className="absolute left-3 top-2.5 text-emerald-700" size={16} />
+                                <input 
+                                    type="text" 
+                                    placeholder="Search..." 
+                                    className="pl-10 pr-4 py-2 bg-emerald-950 border border-emerald-800 text-sm rounded-lg focus:ring-2 focus:ring-cyan-500 outline-none"
+                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                />
+                            </div>
                         </div>
                     </div>
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left">
-                            <thead className="bg-gray-50 text-gray-600 uppercase text-xs font-semibold">
+                        <table className="w-full text-left text-sm">
+                            <thead className="bg-emerald-950 text-emerald-300 uppercase text-xs">
                                 <tr>
                                     <th className="px-6 py-4">User</th>
                                     <th className="px-6 py-4">Status</th>
-                                    <th className="px-6 py-4">Actions</th>
+                                    <th className="px-6 py-4 text-right">Actions</th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-gray-100">
+                            <tbody className="divide-y divide-emerald-900">
                                 {filteredUsers.map((user, idx) => (
-                                    <tr key={idx} className="hover:bg-gray-50 transition">
+                                    <tr key={idx} className="hover:bg-emerald-950/50 transition">
                                         <td className="px-6 py-4">
-                                            <div className="font-medium text-gray-800">{user.name}</div>
-                                            <div className="text-sm text-gray-500">{user.email}</div>
+                                            <div className="font-medium text-zinc-100">{user.name}</div>
+                                            <div className="text-xs text-zinc-500">{user.email}</div>
                                         </td>
                                         <td className="px-6 py-4">
-                                            <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                                                user.status === 'blocked' ? 'bg-red-100 text-red-600' : 'bg-green-100 text-green-600'
+                                            <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold uppercase ${
+                                                user.status === 'blocked' ? 'bg-rose-950 text-rose-400' : 'bg-emerald-950 text-emerald-400'
                                             }`}>
                                                 {user.status || 'active'}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4 space-x-2">
-                                            <button 
-                                                onClick={() => toggleBlock(user.email)}
-                                                className="text-sm bg-indigo-50 text-indigo-600 px-3 py-1 rounded hover:bg-indigo-100"
-                                            >
-                                                {user.status === 'blocked' ? 'Unblock' : 'Block'}
+                                        <td className="px-6 py-4 text-right space-x-3">
+                                            <button onClick={() => toggleBlock(user.email)} className="text-cyan-500 hover:text-cyan-300 transition">
+                                                {user.status === 'blocked' ? <ShieldCheck size={18}/> : <ShieldAlert size={18}/>}
                                             </button>
-                                            <button 
-                                                onClick={() => handleDelete(user.email)}
-                                                className="text-sm bg-red-50 text-red-600 px-3 py-1 rounded hover:bg-red-100"
-                                            >
-                                                Delete
+                                            <button onClick={() => handleDelete(user.email)} className="text-rose-500 hover:text-rose-300 transition">
+                                                <Trash2 size={18} />
                                             </button>
                                         </td>
                                     </tr>
@@ -191,19 +214,29 @@ const AdminDashboard = () => {
     );
 };
 
-// Sub-components for cleaner code
-const StatCard = ({ title, value, color }) => (
-    <div className={`bg-white p-6 rounded-xl shadow-sm border-l-4 ${color}`}>
-        <p className="text-sm text-gray-500 font-medium">{title}</p>
-        <p className="text-2xl font-bold text-gray-800">{value}</p>
+// Helpers
+const SidebarItem = ({ icon, label, active = false }) => (
+    <div className={`flex items-center gap-3 p-2 rounded cursor-pointer transition ${active ? 'bg-emerald-800 text-white' : 'text-emerald-500 hover:bg-emerald-900/50 hover:text-emerald-300'}`}>
+        {icon}
+        <span className="font-medium">{label}</span>
     </div>
 );
 
-const NotificationItem = ({ text, time, color }) => (
-    <div className={`flex items-start p-3 rounded-lg ${color}`}>
+const StatCard = ({ icon, title, value, color }) => (
+    <div className={`bg-zinc-900 p-5 rounded-xl border-l-4 ${color} border-emerald-950`}>
+        <div className="flex justify-between items-start mb-2">
+            <p className="text-xs text-zinc-500 font-bold uppercase tracking-wider">{title}</p>
+            <div className="text-zinc-600">{icon}</div>
+        </div>
+        <p className="text-2xl font-bold text-zinc-100">{value}</p>
+    </div>
+);
+
+const NotificationItem = ({ text, time, type }) => (
+    <div className={`flex items-start p-3 rounded-lg border-l-4 ${notificationColors[type]}`}>
         <div className="flex-1">
-            <p className="text-sm font-medium text-gray-800">{text}</p>
-            <p className="text-xs text-gray-500">{time}</p>
+            <p className="text-sm font-medium">{text}</p>
+            <p className="text-[10px] opacity-70 uppercase font-bold">{time}</p>
         </div>
     </div>
 );
