@@ -3,17 +3,20 @@ import toast, { Toaster } from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../Utils/auth';
 import ForgotPassword from './ForgotPassword';
+import { Eye, EyeOff } from 'lucide-react';
 
 
 
 const Login = () => {
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [role, setRole] = useState("user");
+    const [showPassword, setShowPassword] = useState(false);
     const navigate = useNavigate();
 
     const handleInput = (e) => {
         setCredentials({ ...credentials, [e.target.name]: e.target.value });
     };
+    const togglePassword = () => setShowPassword(!showPassword);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -77,13 +80,23 @@ const Login = () => {
                             <label className="text-gray-400 text-sm">Password</label>
                             <div className="relative">
                                 <input 
-                                    type="password" 
+                                    // NEW: Dynamic type based on state
+                                    type={showPassword ? "text" : "password"} 
                                     name="password" 
-                                    className="bg-[#064e3b] text-white p-4 rounded-xl outline-none w-full focus:ring-2 focus:ring-emerald-500 transition" 
+                                    // NEW: Added pr-12 so text doesn't overlap the icon
+                                    className="bg-[#064e3b] text-white p-4 pr-12 rounded-xl outline-none w-full focus:ring-2 focus:ring-emerald-500 transition" 
                                     onChange={handleInput} 
                                     required 
                                 />
                                 
+                                {/* NEW: Eye Toggle Button */}
+                                <button
+                                    type="button"
+                                    onClick={togglePassword}
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                                >
+                                    {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+                                </button>
                             </div>
                         </div>
 
@@ -110,7 +123,7 @@ const Login = () => {
 
                 {/* --- Right Column: Image Panel --- */}
                 <div className="hidden md:flex bg-[url('/images/green-signup.png')] bg-cover bg-center text-white p-12 flex-col justify-between h-full relative  m-2">
-                    <div className="flex justify-between items-center text-2xl font-bold">
+                    <div className="flex justify-between items-center text-3xl font-bold">
                         <div>Logo</div>
                         <span>@</span>
                     </div>
