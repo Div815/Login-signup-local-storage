@@ -26,7 +26,7 @@ const Logo = ({ className = "w-12 h-12" }) => {
           strokeWidth="6" 
           strokeLinecap="round" 
           strokeLinejoin="round"
-          className="text-black opacity-80"
+          className="text-black opacity-100 "
         />
         {/* The '.io' Dot / Chimney */}
         <circle cx="70" cy="35" r="5" className="fill-black animate-pulse" />
