@@ -3,8 +3,13 @@ import { useNavigate } from 'react-router-dom';
 import { registerUser } from '../Utils/auth'; 
 import toast, { Toaster } from 'react-hot-toast';
 import { Eye, EyeOff } from 'lucide-react';
+import { useTheme } from '../context/ThemeContext'; // 1. Import useTheme
+import ThemeToggle from './ThemeToggle'; // 2. Import Toggle
+import Logo from '../Assets/Logo';
+import NavBar from './NavBar';
 
 function Signup() {
+    const { theme } = useTheme(); // 3. Access current theme
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [formData, setFormData] = useState({
@@ -45,74 +50,88 @@ function Signup() {
     };
 
     return (
-        <div className="h-screen w-full bg-black flex items-center justify-center font-questrial overflow-hidden p-4">
+        // 4. Use dynamic background for the screen
+        <div>
+        <NavBar/>      
+        <div className={`h-screen w-full flex items-center justify-center font-questrial overflow-hidden p-4 transition-colors duration-500 ${theme === 'dark' ? 'bg-primary-dark' : 'bg-primary'}`}>
+           
             <Toaster position="top-center" /> 
             
-            <div className="signup-card w-full max-w-6xl h-full max-h-[85vh] grid grid-cols-1 md:grid-cols-2 shadow-xl overflow-hidden ml-0">
+            <div className="signup-card w-full max-w-6xl h-full max-h-[85vh] grid gap-2 grid-cols-1 md:grid-cols-2 shadow-xl overflow-hidden ml-0 relative">
                 
-                {/* --- Left Column --- */}
-                <div className="signup-info bg-[url('/images/green-signup.png')] bg-cover bg-center text-white p-8 md:p-12 relative flex flex-col justify-between h-full ">
+                {/* --- Left Column: Side Panel --- */}
+                {/* 5. Dynamic background image swap */}
+                <div className={`signup-info ${theme === 'dark' ? "bg-[url('/images/dark-green-signup.png')]" : "bg-[url('/images/light-green-signup.png')]"} bg-cover bg-center text-white p-8 md:p-12 relative flex flex-col justify-between h-full transition-all duration-500`}>
                     <div className="flex justify-between items-center text-2xl">
-                        <h2 className='font-bold text-emerald-400'>Logo</h2>
+                        <h2 className={`font-bold ${theme === 'dark' ? 'text-emerald-400' : 'text-white'}`}><Logo /></h2>
                         <span>@</span>
                     </div>
 
                     <div className="flex flex-col justify-center">
-                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-2 max-w-sm">
+                        <h1 className="text-4xl md:text-5xl font-extrabold leading-tight mb-2 max-w-sm text-white">
                             Get Started<br />with Us
                         </h1>
-                        <p className="text-[#a4b5aa] text-base max-w-xs">
+                        <p className={`text-base max-w-xs ${theme === 'dark' ? 'text-[#a4b5aa]' : 'text-emerald-50'}`}>
                             Complete these easy steps to register your account
                         </p>
                     </div>
 
                     <div className="flex justify-start gap-3 mt-4">
-                        <div className="bg-white text-black w-28 h-28 rounded-2xl p-4 flex flex-col justify-between shadow-lg">
+                        {/* Step 1 */}
+                        <div className={`w-28 h-28 rounded-2xl p-4 flex flex-col justify-between shadow-lg transition-colors ${theme === 'dark' ? 'bg-white text-black' : 'bg-emerald-900 text-white'}`}>
                             <span className="font-bold">1</span>
                             <p className="text-sm font-bold leading-tight">Sign up your account</p>
                         </div>
-                        <div className="bg-[#1f4835] w-28 h-28 rounded-2xl p-4 flex flex-col justify-between opacity-80">
+                        {/* Step 2 */}
+                        <div className={`w-28 h-28 rounded-2xl p-4 flex flex-col justify-between opacity-80 transition-colors ${theme === 'dark' ? 'bg-[#1f4835] text-white' : 'bg-emerald-700 text-white'}`}>
                             <span className="text-white/70">2</span>
-                            <span className="text-sm text-white/90 font-medium leading-tight">Set up workspace</span>
+                            <span className="text-sm font-medium leading-tight">Set up workspace</span>
                         </div>
-                        <div className="bg-[#1f4835] w-28 h-28 rounded-2xl p-4 flex flex-col justify-between opacity-80">
+                        {/* Step 3 */}
+                        <div className={`w-28 h-28 rounded-2xl p-4 flex flex-col justify-between opacity-80 transition-colors ${theme === 'dark' ? 'bg-[#1f4835] text-white' : 'bg-emerald-700 text-white'}`}>
                             <span className="text-white/70">3</span>
-                            <span className="text-sm text-white/90 font-medium leading-tight">Set up Profile</span>
+                            <span className="text-sm font-medium leading-tight">Set up Profile</span>
                         </div>
                     </div>
                 </div>
 
 
-                {/* --- Right Column (Form) --- */}
-                <div className="signup-form p-8 md:p-12 flex flex-col justify-center bg-black h-full overflow-y-auto">
-                    <h2 className="text-3xl font-extrabold text-white mb-6">Sign Up Account</h2>
+                {/* --- Right Column: Form --- */}
+                {/* 6. Dynamic background and text color */}
+                <div className={`signup-form p-8 md:p-12 flex flex-col justify-center h-full overflow-y-auto transition-colors duration-500 ${theme === 'dark' ? 'bg-black' : 'bg-white'}`}>
+                    <h2 className={`text-3xl font-extrabold mb-6 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Sign Up Account</h2>
                     
                     <form onSubmit={handleSubmit} className="flex flex-col gap-4">
                         <div className="grid grid-cols-2 gap-4">
                             <div>
-                                <label className="text-[#a4b5aa] block mb-1 text-sm font-medium">First name</label>
-                                <input className="bg-[#064e3b] text-white placeholder-[#3d8a6a] w-full p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all" type="text" name="firstName" placeholder="eg John" value={formData.firstName} onChange={handleInput} required />
+                                <label className={`block mb-1 text-sm font-medium ${theme === 'dark' ? 'text-[#a4b5aa]' : 'text-gray-600'}`}>First name</label>
+                                <input 
+                                    className={`w-full p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all ${theme === 'dark' ? 'bg-[#064e3b] text-white placeholder-[#3d8a6a]' : 'bg-gray-100 text-black placeholder-gray-400'}`} 
+                                    type="text" name="firstName" placeholder="eg John" value={formData.firstName} onChange={handleInput} required 
+                                />
                             </div>
-
-                            
                             <div>
-
-                                <label className="text-[#a4b5aa] block mb-1 text-sm font-medium">Last name</label>
-                                <input className="bg-[#064e3b] text-white placeholder-[#3d8a6a] w-full p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all" type="text" name="lastName" placeholder="Doe" value={formData.lastName} onChange={handleInput} required />
+                                <label className={`block mb-1 text-sm font-medium ${theme === 'dark' ? 'text-[#a4b5aa]' : 'text-gray-600'}`}>Last name</label>
+                                <input 
+                                    className={`w-full p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all ${theme === 'dark' ? 'bg-[#064e3b] text-white placeholder-[#3d8a6a]' : 'bg-gray-100 text-black placeholder-gray-400'}`} 
+                                    type="text" name="lastName" placeholder="Doe" value={formData.lastName} onChange={handleInput} required 
+                                />
                             </div>
                         </div>
 
                         <div>
-                            <label className="text-[#a4b5aa] block mb-1 text-sm font-medium">Email</label>
-                            <input className="bg-[#064e3b] text-white placeholder-[#3d8a6a] w-full p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all" type="email" name="email" placeholder="johndoe@example.com" value={formData.email} onChange={handleInput} required />
+                            <label className={`block mb-1 text-sm font-medium ${theme === 'dark' ? 'text-[#a4b5aa]' : 'text-gray-600'}`}>Email</label>
+                            <input 
+                                className={`w-full p-3 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all ${theme === 'dark' ? 'bg-[#064e3b] text-white placeholder-[#3d8a6a]' : 'bg-gray-100 text-black placeholder-gray-400'}`} 
+                                type="email" name="email" placeholder="johndoe@example.com" value={formData.email} onChange={handleInput} required 
+                            />
                         </div>
 
-                        {/* --- Password Field --- */}
                         <div>
-                            <label className="text-[#a4b5aa] block mb-1 text-sm font-medium">Create password</label>
+                            <label className={`block mb-1 text-sm font-medium ${theme === 'dark' ? 'text-[#a4b5aa]' : 'text-gray-600'}`}>Create password</label>
                             <div className="relative">
                                 <input 
-                                    className="bg-[#064e3b] text-white w-full p-3 pr-12 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all" 
+                                    className={`w-full p-3 pr-12 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all ${theme === 'dark' ? 'bg-[#064e3b] text-white' : 'bg-gray-100 text-black'}`} 
                                     type={showPassword ? "text" : "password"} 
                                     name="password" 
                                     value={formData.password} 
@@ -122,40 +141,43 @@ function Signup() {
                                 <button
                                     type="button"
                                     onClick={togglePassword}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-[#3d8a6a] hover:text-emerald-400 transition-colors"
+                                    className={`absolute right-4 top-1/2 -translate-y-1/2 transition-colors ${theme === 'dark' ? 'text-[#3d8a6a] hover:text-emerald-400' : 'text-gray-400 hover:text-emerald-600'}`}
                                 >
                                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                 </button>
                             </div>
                         </div>
                         
-                
                         <div>
-                            <label className="text-[#a4b5aa] block mb-1 text-sm font-medium">Re-enter password</label>
+                            <label className={`block mb-1 text-sm font-medium ${theme === 'dark' ? 'text-[#a4b5aa]' : 'text-gray-600'}`}>Re-enter password</label>
                             <div className="relative">
                                 <input 
-                                    className="bg-[#064e3b] text-white w-full p-3 pr-12 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all" 
+                                    className={`w-full p-3 pr-12 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition-all ${theme === 'dark' ? 'bg-[#064e3b] text-white' : 'bg-gray-100 text-black'}`} 
                                     type={showPassword ? "text" : "password"} 
                                     name="confirmPassword" 
                                     value={formData.confirmPassword} 
                                     onChange={handleInput} 
                                     required 
                                 />
-                                
                             </div>
                         </div>
   
-                        <button type="submit" className="bg-white hover:bg-gray-100 text-black font-extrabold text-lg py-4 rounded-xl transition shadow-md mt-2 active:scale-95">
+                        <button 
+                            type="submit" 
+                            className={`font-extrabold text-lg py-4 rounded-xl transition shadow-md mt-2 active:scale-95 ${theme === 'dark' ? 'bg-white text-black hover:bg-gray-100' : 'bg-black text-white hover:bg-gray-800'}`}
+                        >
                             Sign up
                         </button>
                     </form>
                     
-                    <p className="text-center text-[#a4b5aa] text-sm mt-6">
-                        Already a user? <button onClick={() => navigate('/login')} className="text-white font-semibold hover:underline">Log in</button>
+                    <p className={`text-center text-sm mt-6 ${theme === 'dark' ? 'text-[#a4b5aa]' : 'text-gray-600'}`}>
+                        Already a user? <button onClick={() => navigate('/login')} className={`font-semibold hover:underline ${theme === 'dark' ? 'text-white' : 'text-emerald-700'}`}>Log in</button>
                     </p>
                 </div>
             </div>
+           
         </div>
+         </div>
     );
 }
 

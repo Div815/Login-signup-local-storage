@@ -4,7 +4,23 @@
   /* This maps the 'font-questrial' class to the Questrial font family */
   --font-questrial: "Questrial", sans-serif;
   
-  /* You can also add your custom green colors here to match the screenshot! */
+  --color-primary: #064e3b;
+  --color-primary-dark: #032d18;
+
   --color-brand-green: #032d18;
   --color-input-dark: #0f2c1d;
+  --variant-dark: .dark &;
+}
+
+:root {
+  --brand-primary: #10b981; /* Brighter emerald for light mode */
+  --bg-page: #f8fafc;       /* Light slate background */
+  --text-base: #0037b7e6;     /* Dark slate text */
+}
+
+/* 4. DARK MODE COLORS */
+.dark {
+  --brand-primary-dark: #064e3b; /* Your deep forest green */
+  --bg-page: #000000;       /* Pure black background */
+  --text-base: #ffffff;     /* White text */
 }

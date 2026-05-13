@@ -1,7 +1,7 @@
 import "./Home.css"
 import { logout } from '../Utils/auth';
 import NavBar from './NavBar'
-import { Sparkles } from 'lucide-react'; // Adding a touch of style
+import { Sparkles } from 'lucide-react'; 
 import { useNavigate } from 'react-router-dom';
 
 function LandingPage() {
@@ -13,10 +13,10 @@ function LandingPage() {
     navigate('/signup');
   };
   return (
-    /* 1. The Container: Needs a rich background for the glass to work */
+    
     <div className="min-h-screen bg-black font-sans relative overflow-hidden">
       
-      {/* 2. Decorative Background Blobs: These make the 'blur' look amazing */}
+      
       <div className="absolute top-[-10%] left-[-10%] w-[500px] h-[500px] bg-emerald-600/20 rounded-full blur-[120px]"></div>
       <div className="absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] bg-cyan-600/10 rounded-full blur-[100px]"></div>
 

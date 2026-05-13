@@ -4,10 +4,14 @@ import { useNavigate } from 'react-router-dom';
 import { loginUser } from '../Utils/auth';
 import ForgotPassword from './ForgotPassword';
 import { Eye, EyeOff } from 'lucide-react';
-
-
+import '../index.css';
+import ThemeToggle from './ThemeToggle';
+import { useTheme } from '../context/ThemeContext'; // 1. Import useTheme
+import NavBar from './NavBar';
+import Logo from '../Assets/Logo';
 
 const Login = () => {
+    const { theme } = useTheme(); // 2. Get the current theme
     const [credentials, setCredentials] = useState({ email: "", password: "" });
     const [role, setRole] = useState("user");
     const [showPassword, setShowPassword] = useState(false);
@@ -33,31 +37,33 @@ const Login = () => {
     };
 
     return (
-        <div className="h-screen w-full bg-black flex items-center justify-center font-questrial overflow-hidden p-4">
+        // 3. Added transition-colors for smooth swap
+        <div>
+        <NavBar/>
+        <div className={`h-screen w-full ${theme === 'dark' ? 'bg-primary-dark ' : 'bg-primary text-black'} transition-colors duration-500 flex items-center justify-center font-questrial overflow-hidden p-4`}>
             <Toaster />
             
-            {/* Main Card Container */}
-            <div className="w-full max-w-6xl h-full max-h-[85vh] grid grid-cols-1 md:grid-cols-2 shadow-xl overflow-hidden ">
+            <div className="w-full max-w-6xl  max-h-[85vh] grid grid-cols-1 md:grid-cols-2 shadow-xl overflow-hidden ">
                 
                 {/* --- Left Column: Login Form --- */}
-                <div className="p-8 md:p-16 flex flex-col justify-center bg-black text-white h-full">
+                {/* 4. Made background and text color dynamic */}
+                <div className={`p-8 md:p-16 flex flex-col justify-center transition-colors duration-500 h-full ${theme === 'dark' ? 'bg-primary-dark text-white' : 'bg-white text-black'}`}>
                     <div className="mb-10">
                         <h1 className="text-4xl font-extrabold mb-2">Welcome Back!</h1>
-                        <p className="text-gray-400">Log in to access your services.</p>
+                        <p className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>Log in to access your services.</p>
                     </div>
 
-                    {/* Role Selection (Kept from your original code) */}
                     <div className="flex gap-4 mb-8">
                         <button 
                             type="button" 
-                            className={`px-6 py-2 rounded-full transition ${role === 'user' ? 'bg-white text-black font-bold' : 'border border-gray-600 text-gray-400'}`}
+                            className={`px-6 py-2 rounded-full transition ${role === 'user' ? (theme === 'dark' ? 'bg-white text-black font-bold' : 'bg-black text-white font-bold') : 'border border-gray-600 text-gray-400'}`}
                             onClick={() => setRole('user')}
                         >
                             User
                         </button>
                         <button 
                             type="button" 
-                            className={`px-6 py-2 rounded-full transition ${role === 'admin' ? 'bg-white text-black font-bold' : 'border border-gray-600 text-gray-400'}`}
+                            className={`px-6 py-2 rounded-full transition ${role === 'admin' ? (theme === 'dark' ? 'bg-white text-black font-bold' : 'bg-black text-white font-bold') : 'border border-gray-600 text-gray-400'}`}
                             onClick={() => setRole('admin')}
                         >
                             Admin
@@ -66,34 +72,31 @@ const Login = () => {
 
                     <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                         <div className="flex flex-col gap-2">
-                            <label className="text-gray-400 text-sm">Email</label>
+                            <label className={theme === 'dark' ? 'text-gray-400 text-sm' : 'text-gray-600 text-sm'}>Email</label>
                             <input 
                                 type="email" 
                                 name="email" 
-                                className="bg-[#064e3b] text-white p-4 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition" 
+                                // 5. Made input background dynamic
+                                className={`p-4 rounded-xl outline-none focus:ring-2 focus:ring-emerald-500 transition ${theme === 'dark' ? 'bg-[#064e3b] text-white' : 'bg-gray-100 text-black'}`}
                                 onChange={handleInput} 
                                 required 
                             />
                         </div>
 
                         <div className="flex flex-col gap-2">
-                            <label className="text-gray-400 text-sm">Password</label>
+                            <label className={theme === 'dark' ? 'text-gray-400 text-sm' : 'text-gray-600 text-sm'}>Password</label>
                             <div className="relative">
                                 <input 
-                                    // NEW: Dynamic type based on state
                                     type={showPassword ? "text" : "password"} 
                                     name="password" 
-                                    // NEW: Added pr-12 so text doesn't overlap the icon
-                                    className="bg-[#064e3b] text-white p-4 pr-12 rounded-xl outline-none w-full focus:ring-2 focus:ring-emerald-500 transition" 
+                                    className={`p-4 pr-12 rounded-xl outline-none w-full focus:ring-2 focus:ring-emerald-500 transition ${theme === 'dark' ? 'bg-[#064e3b] text-white' : 'bg-gray-100 text-black'}`}
                                     onChange={handleInput} 
                                     required 
                                 />
-                                
-                                {/* NEW: Eye Toggle Button */}
                                 <button
                                     type="button"
                                     onClick={togglePassword}
-                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white transition-colors"
+                                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-emerald-500 transition-colors"
                                 >
                                     {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
                                 </button>
@@ -103,28 +106,29 @@ const Login = () => {
                         <div className="flex justify-between items-center text-sm">
                             <label className="flex items-center gap-2 cursor-pointer">
                                 <input type="checkbox" className="accent-emerald-500" />
-                                <span className="text-gray-400">Remember Me</span>
+                                <span className={theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}>Remember Me</span>
                             </label>
                             <a href="/forgot-password" className="text-blue-500 hover:underline">Forgot Password</a>
                         </div>
 
                         <button 
                             type="submit" 
-                            className="bg-white text-black font-extrabold text-xl py-4 rounded-2xl transition hover:bg-gray-200 mt-4 shadow-lg w-full max-w-xs mx-auto md:mx-0"
+                            className={`font-extrabold text-xl py-4 rounded-2xl transition mt-4 shadow-lg w-full max-w-xs mx-auto md:mx-0 ${theme === 'dark' ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}
                         >
                             Log In
                         </button>
                     </form>
                     
-                    <p className="mt-8 text-gray-400 text-center md:text-left">
-                        New User? <a href="/" className="text-white font-bold hover:underline ml-1">Register</a>
+                    <p className={`mt-8 text-center md:text-left ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                        New User? <a href="/signup" className={`font-bold hover:underline ml-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Register</a>
                     </p>
                 </div>
 
                 {/* --- Right Column: Image Panel --- */}
-                <div className="hidden md:flex bg-[url('/images/green-signup.png')] bg-cover bg-center text-white p-12 flex-col justify-between h-full relative  m-2">
+                {/* 6. Swap background image based on theme */}
+                <div className={`hidden md:flex ${theme === 'dark' ? "bg-[url('/images/dark-green-signup.png')]" : "bg-[url('/images/light-green-signup.png')]"} bg-cover bg-center text-white p-12 flex-col justify-between h-full relative m-2 transition-all duration-500`}>
                     <div className="flex justify-between items-center text-3xl font-bold">
-                        <div>Logo</div>
+                        <div><Logo /></div>
                         <span>@</span>
                     </div>
 
@@ -132,13 +136,15 @@ const Login = () => {
                         <h2 className="text-4xl font-extrabold leading-tight mb-4">
                             Explore AI Services Faster, Smoother and Easier
                         </h2>
-                        <p className="text-gray-300 text-lg opacity-80 leading-relaxed">
+                        <p className="text-gray-100 text-lg font-bold leading-relaxed">
                             Explore the various AI services and easily scalable solutions at the lowest cost possible.
                         </p>
                     </div>
                 </div>
 
             </div>
+            
+        </div>
         </div>
     );
 };

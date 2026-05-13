@@ -25,6 +25,7 @@ import {
 } from 'chart.js';
 import { Bar } from 'react-chartjs-2';
 
+
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 
 const notificationColors = {
@@ -109,6 +110,7 @@ const AdminDashboard = () => {
                 >
                     <LogOut size={18} /> Logout
                 </button>
+                
             </aside>
 
             {/* Main Content */}

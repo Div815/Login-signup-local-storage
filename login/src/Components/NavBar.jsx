@@ -3,7 +3,12 @@ import React from 'react'
 import { logout } from '../Utils/auth'; // Import the logout function
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
+import ThemeToggle from './ThemeToggle';
+import { ThemeProvider } from '../context/ThemeContext';
+import { useTheme } from '../context/ThemeContext';
+
 function NavBar() {
+  const { theme } = useTheme(); // Get the current theme
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
@@ -16,11 +21,12 @@ function NavBar() {
     navigate('/login');
   };
   const handleSignup = () => {
-    navigate('/');
+    navigate('/signup');
   };
   return (
-    <div className='navbar font-questrial max-w-screen-lg mx-auto p-4 flex justify-between items-center'>
+    <div className={`navbar font-questrial ${theme === 'dark' ? 'bg-primary-dark text-white' : 'bg-primary text-black'}  mx-auto p-4 flex justify-between items-center`}>
         <div className='logo text-2xl font-bold text-emerald-400'>RealEstate.io</div> 
+        <div className='flex space-x-50 justify-end items-end'>
         <ul className='nav-links flex space-x-6 justify-end items-center'>
             
             <li>About</li>
@@ -30,6 +36,8 @@ function NavBar() {
             <li><button onClick={handleLogout} className="logout-btn">Logout</button></li>
 
         </ul>
+        <ThemeToggle />
+        </div>
     </div>
   )
 }
