@@ -36,6 +36,7 @@ const Login = () => {
 
     return (
         <div className="h-screen w-full flex flex-col bg-primary transition-colors duration-500 overflow-hidden relative">
+             <Toaster />
             <NavBar />
 
             {/* Background Blobs - Clipped by overflow-hidden on the parent */}
@@ -44,7 +45,7 @@ const Login = () => {
 
             {/* Main Content Area */}
             <div className={`flex-1 w-full ${theme === 'dark' ? 'bg-slate-800' : 'bg-primary text-black'} transition-colors duration-500 flex items-center justify-center p-4 relative z-10`}>
-                <Toaster />
+               
                 
                 {/* 1. The Grid Container: 'items-stretch' ensures both columns match height automatically */}
                 <div className="w-full max-w-6xl grid grid-cols-1 md:grid-cols-2 shadow-2xl overflow-hidden rounded-2xl min-h-[600px] items-stretch">
@@ -92,7 +93,7 @@ const Login = () => {
                                         onChange={handleInput} 
                                         required 
                                     />
-                                    <button type="button" onClick={togglePassword} className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-400 hover:text-emerald-500 transition-colors">
+                                    <button type="button" onClick={togglePassword} className={`absolute right-4 top-1/2 -translate-y-1/2 ${theme === 'dark' ? 'text-gray-400 hover:text-cyan-600' : 'text-gray-400 hover:text-emerald-600'} transition-colors`}>
                                         {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                     </button>
                                 </div>
@@ -110,7 +111,7 @@ const Login = () => {
 
                     {/* --- Right Column: Image Panel --- */}
                     {/* 2. Added 'h-full' to ensure the background covers the entire grid area */}
-                    <div className={`hidden md:flex ${theme === 'dark' ? "bg-[url('/images/dark-blue-signup.jpg')]" : "bg-[url('/images/light-green-signup.png')]"} bg-cover bg-center text-white p-12 flex-col justify-between h-full relative transition-all duration-500`}>
+                    <div className={`hidden md:flex ${theme === 'dark' ? "bg-[url('/images/dark-blue-signup.jpg')]" : "bg-[url('/images/light-green-signup.jpg')]"} bg-cover bg-center text-white p-12 flex-col justify-between h-full relative transition-all duration-500`}>
                         <div className="flex justify-between items-center text-3xl font-bold">
                             <div className="flex items-center gap-2">
                                 <Logo />

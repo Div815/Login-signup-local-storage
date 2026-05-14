@@ -1,9 +1,11 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import toast,{Toaster} from 'react-hot-toast';
-
+import { useTheme } from '../context/ThemeContext';
+import NavBar from './NavBar';
 const Home = () => {
   const navigate = useNavigate();
+  const { theme } = useTheme();
   const handleLogout = () => {
     toast.success("You have been logged out.");
     setTimeout(() => {
@@ -15,7 +17,8 @@ const Home = () => {
     
     <div >
       <Toaster />
-      <div className='bg-black text-white h-screen flex items-center justify-center font-questrial text-3xl'>
+      <NavBar/>
+      <div className={`${theme === 'dark' ? 'bg-slate-800' : 'bg-primary text-black'} transition-colors duration-500 h-screen flex items-center justify-center font-questrial text-3xl`}>
       Welcome to your Home Page!
 
       <button onClick={handleLogout} className='ml-6 px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-black font-bold rounded-xl transition shadow-lg shadow-emerald-500/20'>

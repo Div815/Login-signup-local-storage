@@ -22,8 +22,8 @@ function NavBar() {
 
   return (
     /* 1. Outer Wrapper: Stretches edge-to-edge (w-full) and handles the background/border */
-    <nav className={`w-full font-questrial sticky top-0 z-50 transition-colors duration-500 
-      ${theme === 'dark' ? 'bg-slate-900/90 text-white border-b-2 border-cyan-900' : 'bg-white/90 text-black border-b-2 border-emerald-200'} 
+    <nav className={`w-full font-questrial sticky top-0 z-50 transition-all duration-800 
+      ${theme === 'dark' ? 'bg-slate-900 text-white border-b-2 border-cyan-900' : 'bg-white/90 text-black border-b-2 border-emerald-200'} 
       backdrop-blur-md`}>
       
       {/* 2. Inner Container: Centers the content and provides horizontal padding */}
@@ -59,7 +59,7 @@ function NavBar() {
             <ThemeToggle />
           </div>
         </div>
-
+      
       </div>
     </nav>
   )
