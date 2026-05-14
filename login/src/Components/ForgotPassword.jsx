@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
+import NavBar from './NavBar';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
@@ -26,15 +27,7 @@ const ForgotPassword = () => {
         <div className="min-h-screen bg-black text-white font-questrial selection:bg-emerald-500/30">
             <Toaster />
             
-            {/* Navbar */}
-            <nav className="flex justify-between items-center px-10 py-6">
-                <div className="text-2xl font-bold tracking-tight">Logo</div>
-                <div className="flex gap-8 items-center text-gray-300">
-                    <a href="/" className="hover:text-white transition-colors">Home</a>
-                    <a href="/services" className="hover:text-white transition-colors">Services</a>
-                    <div className="text-xl cursor-pointer hover:text-white">@</div>
-                </div>
-            </nav>
+            <NavBar/>
 
             {/* Main Content */}
             <div className="flex flex-col lg:flex-row items-center justify-center min-h-[85vh] px-6 lg:px-20 gap-16">

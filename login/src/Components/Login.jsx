@@ -34,6 +34,10 @@ const Login = () => {
         }
     };
 
+    const handleForgot = () => {
+        navigate('/forgot-password');
+    }
+
     return (
         <div className="h-screen w-full flex flex-col bg-primary transition-colors duration-500 overflow-hidden relative">
              <Toaster />
@@ -96,10 +100,14 @@ const Login = () => {
                                     <button type="button" onClick={togglePassword} className={`absolute right-4 top-1/2 -translate-y-1/2 ${theme === 'dark' ? 'text-gray-400 hover:text-cyan-600' : 'text-gray-400 hover:text-emerald-600'} transition-colors`}>
                                         {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                                     </button>
+
                                 </div>
+                                <button onClick={handleForgot} className={`text-sm self-end ${theme === 'dark' ? 'text-cyan-400 hover:text-cyan-300' : 'text-emerald-500 hover:text-emerald-400'} transition-colors`}>
+                                    Forgot password?
+                                </button>
                             </div>
 
-                            <button type="submit" className={`font-extrabold text-xl py-4 rounded-2xl transition mt-4 shadow-lg w-full max-w-xs mx-auto md:mx-0 ${theme === 'dark' ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
+                            <button type="submit" className={`self-center font-questrial font-extrabold text-xl py-4 rounded-2xl transition mt-4 shadow-lg w-full max-w-xs mx-auto md:mx-0 ${theme === 'dark' ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
                                 Log In
                             </button>
                         </form>

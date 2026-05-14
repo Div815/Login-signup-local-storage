@@ -38,20 +38,20 @@ function NavBar() {
         {/* Links and Toggle Section */}
         <div className='flex items-center space-x-8'>
           <ul className='nav-links flex space-x-8 items-center font-medium'>
-            <li className="hover:text-emerald-500 cursor-pointer transition">About</li>
-            <li className="hover:text-emerald-500 cursor-pointer transition">Contact</li>
+            <li className="hover:underline cursor-pointer transition">About</li>
+            <li className="hover:underline cursor-pointer transition">Contact</li>
             <li>
-              <button onClick={handleLogin} className="hover:underline">Login</button>
+              <button onClick={handleLogin} className="hover:underline cursor-pointer transition">Login</button>
             </li>
             <li>
               <button onClick={handleSignup} 
-                className={`px-5 py-2 rounded-lg transition-all 
+                className={`px-5 py-2 rounded-lg  hover:underline cursor-pointer transition
                 `}>
                 Signup
               </button>
             </li>
             <li>
-              <button onClick={handleLogout} className="text-red-400 hover:text-red-500 text-sm">Logout</button>
+              <button onClick={handleLogout} className="text-red-400 hover:underline cursor-pointer transition text-sm">Logout</button>
             </li>
           </ul>
           
