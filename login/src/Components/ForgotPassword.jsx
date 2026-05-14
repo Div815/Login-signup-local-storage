@@ -2,11 +2,13 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import NavBar from './NavBar';
+import { useTheme } from '../context/ThemeContext';
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState("");
     const [newPassword, setNewPassword] = useState(""); 
     const navigate = useNavigate();
+    const {theme} = useTheme();
 
     const handleReset = (e) => {
         e.preventDefault();
@@ -24,7 +26,7 @@ const ForgotPassword = () => {
     };
 
     return (
-        <div className="min-h-screen bg-black text-white font-questrial selection:bg-emerald-500/30">
+        <div className={`min-h-screen ${theme === 'dark' ? 'bg-slate-800' : 'bg-primary text-black'} text-white font-questrial transition-colors duration-500`}>
             <Toaster />
             
             <NavBar/>
@@ -49,7 +51,7 @@ const ForgotPassword = () => {
                 <div className="flex-1 w-full max-w-xl h-full"> {/* Increased max-w for more width */}
                     <div 
                         className="relative overflow-hidden p-12 lg:p-16 bg-cover bg-center shadow-2xl min-h-[700px] min-w-[650px] flex flex-col justify-center" // Added min-h and more padding for height
-                        style={{ backgroundImage: "url('/images/green-signup.png')" }}
+                        
                     >
                         {/* Overlay */}
                         <div className="absolute inset-0 bg-black/10 backdrop-blur-[1px]"></div>
@@ -65,7 +67,7 @@ const ForgotPassword = () => {
                                     <input 
                                         type="email" 
                                         placeholder="Enter Registered Email" 
-                                        className="input input-bordered w-full bg-[#064e3b] border-white border-1 focus:border-white focus:outline-none h-14 text-white rounded-2xl placeholder:text-gray-400 text-lg px-6"
+                                        className={`input input-bordered w-full ${theme === 'dark' ? 'bg-slate-800' : 'bg-primary text-black'} border-white border-1 focus:border-white focus:outline-none h-14 text-white rounded-2xl placeholder:text-gray-400 text-lg px-6`}
                                         onChange={(e) => setEmail(e.target.value)} 
                                         required 
                                     />
@@ -76,7 +78,7 @@ const ForgotPassword = () => {
                                     <input 
                                         type="password" 
                                         placeholder="Enter New Password" 
-                                        className="input input-bordered w-full bg-[#064e3b] border-white border-1 focus:border-white focus:outline-none h-14 text-white rounded-2xl placeholder:text-gray-400 text-lg px-6"
+                                        className={`input input-bordered w-full ${theme === 'dark' ? 'bg-slate-800' : 'bg-primary text-black'} border-white border-1 focus:border-white focus:outline-none h-14 text-white rounded-2xl placeholder:text-gray-400 text-lg px-6`}
                                         onChange={(e) => setNewPassword(e.target.value)} 
                                         required 
                                     />
