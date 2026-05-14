@@ -18,9 +18,9 @@
   --text-base: #0037b7e6;     /* Dark slate text */
 }
 
-/* 4. DARK MODE COLORS */
+
 .dark {
-  --brand-primary-dark: #064e3b; /* Your deep forest green */
+  --brand-primary-dark: #030820;  
   --bg-page: #000000;       /* Pure black background */
   --text-base: #ffffff;     /* White text */
 }
