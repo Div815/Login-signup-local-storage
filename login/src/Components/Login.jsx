@@ -107,12 +107,12 @@ const Login = () => {
                                 </button>
                             </div>
 
-                            <button type="submit" className={`self-center font-questrial font-extrabold text-xl py-4 rounded-2xl transition mt-4 shadow-lg w-full max-w-xs mx-auto md:mx-0 ${theme === 'dark' ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
+                            <button type="submit" className={`self-center font-questrial font-extrabold text-xl py-4 rounded-2xl transition mt-4 shadow-lg w-full max-w-s mx-auto md:mx-0 ${theme === 'dark' ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
                                 Log In
                             </button>
                         </form>
                         
-                        <p className={`mt-8 text-center md:text-left ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
+                        <p className={`mt-8 self-center text-center md:text-left ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                             New User? <a href="/signup" className={`font-bold hover:underline ml-1 ${theme === 'dark' ? 'text-white' : 'text-black'}`}>Register</a>
                         </p>
                     </div>
