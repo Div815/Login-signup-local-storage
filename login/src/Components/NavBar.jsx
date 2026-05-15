@@ -5,12 +5,11 @@ import { useNavigate } from 'react-router-dom';
 import ThemeToggle from './ThemeToggle';
 import { useTheme } from '../context/ThemeContext';
 
+
 function NavBar() {
-  const { theme } = useTheme(); 
+   
   const navigate = useNavigate();
-  
-  // State for the About dropdown
-  const [isOpen, setIsOpen] = useState(false);
+  const { theme, language, changeLanguage } = useTheme();
 
   const handleLogout = () => {
     logout();
@@ -93,9 +92,18 @@ function NavBar() {
             </li>
           </ul>
           
-          <div className="border-l border-gray-700 pl-6">
-            <ThemeToggle />
-          </div>
+          <div className="border-inline-start border-gray-700 padding-inline-start-6 flex gap-2">
+    <select 
+    value={language} 
+    onChange={(e) => changeLanguage(e.target.value)}
+    className="bg-transparent border border-gray-600 rounded px-2 text-sm"
+    >
+    <option value="en">English</option>
+    <option value="ar">العربية (Arabic)</option>
+    <option value="he">עברית (Hebrew)</option>
+      </select>
+    <ThemeToggle />
+    </div>
         </div>
       
       </div>

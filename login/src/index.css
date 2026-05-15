@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-  /* This maps the 'font-questrial' class to the Questrial font family */
   --font-questrial: "Questrial", sans-serif;
   
   --color-primary: #064e3b;
@@ -13,14 +12,46 @@
 }
 
 :root {
-  --brand-primary: #10b981; /* Brighter emerald for light mode */
-  --bg-page: #f8fafc;       /* Light slate background */
-  --text-base: #0037b7e6;     /* Dark slate text */
+  --brand-primary: #10b981; 
+  --bg-page: #f8fafc;       
+  --text-base: #0037b7e6;     
 }
-
 
 .dark {
   --brand-primary-dark: #030820;  
-  --bg-page: #000000;       /* Pure black background */
-  --text-base: #ffffff;     /* White text */
+  --bg-page: #000000;       
+  --text-base: #ffffff;     
+}
+
+/* --- RTL & MULTI-LANGUAGE ADDITIONS --- */
+
+@layer base {
+  /* Ensure text direction defaults correctly */
+  body {
+    @apply antialiased text-start bg-[var(--bg-page)] text-[var(--text-base)];
+  }
+
+  /* Typography Fixes for RTL */
+  [lang="ar"], [lang="he"] {
+    /* Arabic and Hebrew usually need slightly more line height than Latin scripts */
+    line-height: 1.6;
+    /* Disable tracking (letter spacing) as it breaks cursive scripts like Arabic */
+    letter-spacing: 0 !important;
+  }
+
+  /* Reset inputs so the cursor starts on the correct side */
+  input, textarea {
+    text-align: inherit;
+  }
+}
+
+@layer utilities {
+  /* Utility to flip specific icons (like arrows) in RTL mode */
+  .rtl-flip {
+    transition: transform 0.3s ease;
+  }
+
+  [dir="rtl"] .rtl-flip {
+    transform: scaleX(-1);
+  }
 }
