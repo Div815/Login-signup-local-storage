@@ -43,7 +43,7 @@ export const loginUser = (email, password, selectedRole) => {
     if (userMatch) {
         // Optional: Prevent login if admin has blocked the user
         if (userMatch.status === "blocked") {
-            return { success: false, message: "Your account has been blocked." };
+            return { success: false, message: "Your account has been blocked.Contact the Admin" };
         }
 
         localStorage.setItem("isAuth", "true");

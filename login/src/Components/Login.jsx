@@ -40,15 +40,13 @@ const Login = () => {
 
     return (
         <div className="h-screen w-full flex flex-col bg-primary transition-colors duration-500 overflow-hidden relative">
-             <Toaster />
+             <Toaster  />
             <NavBar />
 
-            {/* Background Blobs - Clipped by overflow-hidden on the parent */}
-            <div className={`absolute top-[-10%] left-[-10%] w-[500px] h-[500px] ${theme === 'dark' ? 'bg-emerald-600/20' : 'bg-emerald-400/20'} rounded-full blur-[120px] pointer-events-none z-0`}></div>
-            <div className={`absolute bottom-[10%] right-[-5%] w-[400px] h-[400px] ${theme === 'dark' ? 'bg-blue-600/30' : 'bg-cyan-400/30'} rounded-full blur-[100px] pointer-events-none z-0`}></div>
+            
 
             {/* Main Content Area */}
-            <div className={`flex-1 w-full ${theme === 'dark' ? 'bg-slate-800' : 'bg-primary text-black'} transition-colors duration-500 flex items-center justify-center p-4 relative z-10`}>
+            <div className={`flex-1   w-full ${theme === 'dark' ? 'bg-slate-800' : 'bg-primary text-black'} transition-colors duration-500 flex items-center justify-center p-4 relative z-10`}>
                
                 
                 {/* 1. The Grid Container: 'items-stretch' ensures both columns match height automatically */}
@@ -102,9 +100,11 @@ const Login = () => {
                                     </button>
 
                                 </div>
-                                <button onClick={handleForgot} className={`text-sm self-end ${theme === 'dark' ? 'text-cyan-400 hover:text-cyan-300' : 'text-emerald-500 hover:text-emerald-400'} transition-colors`}>
+                                <div >
+                                <button type="button" onClick={handleForgot} className={`text-sm self-end ${theme === 'dark' ? 'text-cyan-400 hover:text-cyan-300' : 'text-emerald-500 hover:text-emerald-400'} transition-colors`}>
                                     Forgot password?
                                 </button>
+                                </div>
                             </div>
 
                             <button type="submit" className={`self-center font-questrial font-extrabold text-xl py-4 rounded-2xl transition mt-4 shadow-lg w-full max-w-s mx-auto md:mx-0 ${theme === 'dark' ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>

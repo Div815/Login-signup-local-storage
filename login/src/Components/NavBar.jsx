@@ -10,7 +10,7 @@ function NavBar() {
   const navigate = useNavigate();
   
   // State for the About dropdown
-  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
 
   const handleLogout = () => {
     logout();
@@ -22,7 +22,7 @@ function NavBar() {
 
   const handleNavigation = (path) => {
     navigate(path);
-    setIsAboutOpen(false); // Close dropdown after clicking
+    setIsOpen(false); // Close dropdown after clicking
   };
 
   const handleLogin = () => navigate('/login');
@@ -46,18 +46,18 @@ function NavBar() {
             {/* --- DROPDOWN START --- */}
             <li 
               className="relative" 
-              onMouseEnter={() => setIsAboutOpen(true)}
-              onMouseLeave={() => setIsAboutOpen(false)}
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
             >
               <button className="flex items-center gap-1 hover:underline cursor-pointer transition">
                 Home
-                <svg className={`w-4 h-4 transition-transform ${isAboutOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className={`w-4 h-4 transition-transform ${isOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
                 </svg>
               </button>
 
               {/* Dropdown Menu */}
-              {isAboutOpen && (
+              {isOpen && (
                 <div className={`absolute left-0 mt-0 w-40 rounded-lg shadow-xl ring-1 ring-black ring-opacity-5 z-50
                   ${theme === 'dark' ? 'bg-slate-800 border border-cyan-900' : 'bg-white border border-emerald-100'}`}>
                   <div className="py-2">
