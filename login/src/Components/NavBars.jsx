@@ -6,7 +6,7 @@ import ThemeToggle from './ThemeToggle';
 import { useTheme } from '../context/ThemeContext';
 
 
-function NavBar2() {
+function NavBars() {
    
   const navigate = useNavigate();
   const { theme, language, changeLanguage } = useTheme();
@@ -44,26 +44,14 @@ function NavBar2() {
           <ul className='nav-links flex space-x-8 items-center font-medium'>
             <li className="hover:underline cursor-pointer transition">About</li>
             <li className="hover:underline cursor-pointer transition">Contact</li>
-            <li>
-              <button onClick={handleLogin} className="hover:underline cursor-pointer transition">Login</button>
-            </li>
-            <li>
-              <button onClick={handleSignup} 
-                className={`px-5 py-2 rounded-lg  hover:underline cursor-pointer transition
-                `}>
-                Signup
-              </button>
-            </li>
-            <li>
-              <button onClick={handleLogout} className="text-red-400 hover:underline cursor-pointer transition text-sm">Logout</button>
-            </li>
+            
           </ul>
           
          <div className="border-inline-start border-gray-700 padding-inline-start-6 flex gap-2">
   <select 
     value={language} 
     onChange={(e) => changeLanguage(e.target.value)}
-    className={`${theme === 'dark' ? 'text-cyan-400 border-2' : 'text-emerald-500 border-2' }  rounded px-2 text-sm`}
+    className={`${theme === 'dark' ? 'text-cyan-400 border-2 ' : 'text-emerald-500 border-2' }  rounded px-2 text-sm`}
   >
     <option className={`${theme === 'dark' ? 'bg-slate-800 text-cyan-400' : 'bg-white text-emerald-500' }`} value="en">English</option>
     <option className={`${theme === 'dark' ? 'bg-slate-800 text-cyan-400' : 'bg-white text-emerald-500' }`} value="ar">العربية (Arabic)</option>
@@ -78,4 +66,4 @@ function NavBar2() {
   )
 }
 
-export default NavBar2
+export default NavBars

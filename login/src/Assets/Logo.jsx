@@ -1,8 +1,11 @@
 import React from 'react';
+import { useTheme } from '../context/ThemeContext';
 
 const Logo = ({ className = "w-12 h-12" }) => {
+  const { theme } = useTheme();
+
   return (
-    <div className="flex items-center gap-3 select-none">
+    <div className="relative inline-flex items-center gap-3 select-none" dir="ltr">
       {/* The Icon */}
       <svg 
         viewBox="0 0 100 100" 
@@ -17,7 +20,7 @@ const Logo = ({ className = "w-12 h-12" }) => {
           strokeWidth="8" 
           strokeLinecap="round" 
           strokeLinejoin="round"
-          className="text-black"
+          className={`${theme === 'dark' ? 'text-white' : 'text-white'}`}
         />
         {/* Digital 'IO' Pulse / Floor line */}
         <path 
@@ -26,18 +29,18 @@ const Logo = ({ className = "w-12 h-12" }) => {
           strokeWidth="6" 
           strokeLinecap="round" 
           strokeLinejoin="round"
-          className="text-black opacity-100 "
+          className={`${theme === 'dark' ? 'text-white' : 'text-white'}`}
         />
         {/* The '.io' Dot / Chimney */}
-        <circle cx="70" cy="35" r="5" className="fill-black animate-pulse" />
+        <circle cx="70" cy="35" r="5" className={`${theme === 'dark' ? 'text-white' : 'text-white'} animate-pulse`} />
       </svg>
 
       {/* The Typography */}
       <div className="flex flex-col leading-none">
-        <span className="text-2xl font-extrabold tracking-tighter text-black font-questrial">
-          RealEstate<span className="text-black">.io</span>
+        <span className={`${theme === 'dark' ? 'text-white' : 'text-white'} `}>
+          RealEstate<span className={`${theme === 'dark' ? 'text-white' : 'text-white'}`}>.io</span>
         </span>
-        <span className="text-[10px] uppercase tracking-[0.2em] text-black font-medium">
+        <span className={`${theme === 'dark' ? 'text-white' : 'text-white'} text-[10px] `}>
           Digital Assets
         </span>
       </div>
