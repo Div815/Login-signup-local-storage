@@ -113,4 +113,4 @@ function NavBar2() {
   )
 }
 
-export default NavBar
+export default NavBar2;
