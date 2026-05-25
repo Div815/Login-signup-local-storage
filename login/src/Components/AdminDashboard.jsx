@@ -94,7 +94,7 @@ const AdminDashboard = () => {
     return (
         <div className="flex min-h-screen bg-black font-questrial text-white">
             {/* Sidebar */}
-            <aside className="w-64 bg-emerald-950 text-zinc-100 hidden md:flex flex-col p-6">
+            <aside className="fixed bg-emerald-950 text-zinc-100 hidden md:flex flex-col p-6">
                 <div className="flex items-center gap-2 mb-8 text-emerald-300">
                     <ShieldCheck size={28} />
                     <h2 className="text-2xl font-bold">AdminPro</h2>
@@ -126,7 +126,7 @@ const AdminDashboard = () => {
                 </div>
 
                 {/* Statistics Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8 border-inline-start-4">
                     <StatCard icon={<Users size={20}/>} title="Total Users" value={totalUsers} color="border-cyan-500" />
                     <StatCard icon={<ShieldCheck size={20}/>} title="Active Users" value={activeUsers} color="border-emerald-500" />
                     <StatCard icon={<ShieldAlert size={20}/>} title="Blocked Users" value={blockedUsers} color="border-rose-500" />
@@ -164,7 +164,7 @@ const AdminDashboard = () => {
                         <h3 className="text-lg font-bold text-emerald-300">User Management</h3>
                         <div className="flex gap-2">
                             <div className="relative">
-                                <Search className="absolute left-3 top-2.5 text-emerald-700" size={16} />
+                                <Search className="absolute inset-inline-start-3 top-2.5 text-emerald-700" size={16} />
                                 <input 
                                     type="text" 
                                     placeholder="Search..." 
@@ -175,7 +175,7 @@ const AdminDashboard = () => {
                         </div>
                     </div>
                     <div className="overflow-x-auto">
-                        <table className="w-full text-left text-sm">
+                        <table className="w-full text-start text-sm">
                             <thead className="bg-emerald-950 text-emerald-300 uppercase text-xs">
                                 <tr>
                                     <th className="px-6 py-4">User</th>
@@ -225,7 +225,7 @@ const SidebarItem = ({ icon, label, active = false }) => (
 );
 
 const StatCard = ({ icon, title, value, color }) => (
-    <div className={`bg-zinc-900 p-5 rounded-xl border-l-4 ${color} border-emerald-950`}>
+    <div className={`bg-zinc-900 p-5 rounded-xl border-inline-start-4 ${color} border-emerald-950`}>
         <div className="flex justify-between items-start mb-2">
             <p className="text-xs text-zinc-500 font-bold uppercase tracking-wider">{title}</p>
             <div className="text-zinc-600">{icon}</div>

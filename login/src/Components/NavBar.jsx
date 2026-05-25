@@ -6,10 +6,12 @@ import ThemeToggle from './ThemeToggle';
 import { useTheme } from '../context/ThemeContext';
 
 
-function NavBar() {
+function NavBar2() {
    
   const navigate = useNavigate();
   const { theme, language, changeLanguage } = useTheme();
+
+  
 
   const handleLogout = () => {
     logout();
@@ -92,18 +94,18 @@ function NavBar() {
             </li>
           </ul>
           
-          <div className="border-inline-start border-gray-700 padding-inline-start-6 flex gap-2">
-    <select 
+         <div className="border-inline-start border-gray-700 padding-inline-start-6 flex gap-2">
+  <select 
     value={language} 
     onChange={(e) => changeLanguage(e.target.value)}
-    className="bg-transparent border border-gray-600 rounded px-2 text-sm"
-    >
-    <option value="en">English</option>
-    <option value="ar">العربية (Arabic)</option>
-    <option value="he">עברית (Hebrew)</option>
-      </select>
-    <ThemeToggle />
-    </div>
+    className={`${theme === 'dark' ? 'text-cyan-400 border-2' : 'text-emerald-500 border-2' }  rounded px-2 text-sm`}
+  >
+    <option className={`${theme === 'dark' ? 'bg-slate-800 text-cyan-400' : 'bg-white text-emerald-500' }`} value="en">English</option>
+    <option className={`${theme === 'dark' ? 'bg-slate-800 text-cyan-400' : 'bg-white text-emerald-500' }`} value="ar">العربية (Arabic)</option>
+    <option className={`${theme === 'dark' ? 'bg-slate-800 text-cyan-400' : 'bg-white text-emerald-500' }`} value="he">עברית (Hebrew)</option>
+  </select>
+  <ThemeToggle />
+  </div>
         </div>
       
       </div>
@@ -111,4 +113,4 @@ function NavBar() {
   )
 }
 
-export default NavBar;
+export default NavBar
