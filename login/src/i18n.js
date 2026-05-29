@@ -34,7 +34,12 @@ i18n
           "with_us": "with Us",
           "steps_to_register": "Complete these easy steps to register your account" ,
            "step_2": "Set up workspace" ,
-           "step_3": "Set up Profile"
+           "step_3": "Set up Profile" ,
+
+           //NavBar
+           "home": "Home",
+           "about": "About",
+
         }
       },
       ar: {
