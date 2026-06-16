@@ -9,7 +9,8 @@ import AdminDashboard from './Components/AdminDashboard';
 import { ProtectedRoute, AdminRoute } from './Utils/ProtectedRoute';
 import './index.css';
 import { ThemeProvider } from './context/ThemeContext';
-
+import {app,database} from './firebaseConfig';
+import {collection, addDoc} from 'firebase/firestore';
 function App() {
   return (
     <ThemeProvider>
