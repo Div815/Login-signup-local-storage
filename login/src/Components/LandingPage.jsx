@@ -50,7 +50,7 @@ function LandingPage() {
           <div className="flex items-center gap-3">
             <Sparkles
               className={`transition-colors duration-400 ${
-                isDark ? "text-cyan-400" : "text-emerald-500"
+                isDark ? "text-cyan-400" : "text-emerald-400"
               }`}
               size={32}
             />
